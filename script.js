@@ -1,4 +1,4 @@
-// console.log("testiiiing!");
+console.log("testiiiing!");
 
 function getComputerChoice() {
 
@@ -38,22 +38,21 @@ function getHumanChoice() {
 
 const play = document.querySelector(".start");
 const gameTally = document.querySelector(".game-tally");
-const newLine = document.createElement("p");
 
-let counterComputer;
-let counterHuman;
-let counterTies;
-let battleWinner;
-let warWinner;
+
+let counterComputer = 0;
+let counterHuman = 0;
+let counterTies = 0;
+let battleWinner = "no one";
 
 function playGame() {
     
     const computerChoice = getComputerChoice();
     const humanChoice = getHumanChoice();
 
-    if ( (computerChoice = "rock" && humanChoice = "scissors") | (computerChoice = "scissors" && humanChoice = "paper") | (computerChoice = "paper" && humanChoice = "rock")) {
+    if ( (computerChoice === "rock" && humanChoice === "scissors") | (computerChoice === "scissors" && humanChoice === "paper") | (computerChoice === "paper" && humanChoice === "rock")) {
         battleWinner = "computer" ;
-    }   else if ( (computerChoice = "rock" && humanChoice = "paper") | (computerChoice = "scissors" && humanChoice = "rock") | (computerChoice = "paper" && humanChoice = "scissors") ) { 
+    }   else if ( (computerChoice === "rock" && humanChoice === "paper") | (computerChoice === "scissors" && humanChoice === "rock") | (computerChoice === "paper" && humanChoice === "scissors") ) { 
         battleWinner = "human" ; 
     }   else {
         battleWinner = "no one";
@@ -69,22 +68,24 @@ function playGame() {
         counterTies += 1;
     }
 
+    const newLine = document.createElement("p");
+
     newLine.textContent = "Human: " + humanChoice + "; Computer: " + computerChoice + " => " + battleWinner + " wins the battle. The score is now " + counterHuman + " - " + counterComputer + "." ;
 
     if (counterComputer >= 5) {
         newLine.textContent = newLine.textContent + " Computer wins the war."
     }   else if (counterHuman >= 5) {
-        newLine.textContent = newLine.textContent + "Human wins the war."
+        newLine.textContent = newLine.textContent + " Human wins the war."
     }   else {
-        newLine.textContent = newLine.textContent + "The war continues."
+        newLine.textContent = newLine.textContent + " The war continues."
     }
 
-    gameTally.appendChild(NewLine);
+    gameTally.appendChild(newLine);
             
     if (counterComputer >= 5) {
-        alert("The computer won. Better luck next time. Play again?"
+        alert("The computer won. Better luck next time. Play again?");
     }   else if (counterHuman >= 5) {
-        alert("Congratulations, you won! It was never in doubt. Play again?"
+        alert("Congratulations, you won! It was never in doubt. Play again?");
     }   
 
 }
@@ -97,7 +98,11 @@ function startAgain() {
 }
 
 function playMatch() {
-    if (counterComputer>=5 | counterHuman >=5) : startAgain : playGame ;
+    if (counterComputer>=5 | counterHuman >=5) {
+        startAgain();
+    }   else {
+        playGame();
+    }
 }
 
 play.addEventListener("click",playMatch);
